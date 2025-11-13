@@ -5,8 +5,9 @@ class MenuItem {
     this.name = name;
     this.price = price;
   }
+
   getDescription() {
-    return `${this.name} - $${this.price}`;
+    return `$${this.price} - ${this.name}`;
   }
 }
 
@@ -15,12 +16,17 @@ class Entree extends MenuItem {
     super(name, price);
     this.type = type;
   }
+
   getDescription() {
-    return `$${this.name} - ${this.price} (${this.type})`;
+    return `$${this.price} - ${this.name} (${this.type})`;
   }
 }
 
 class Dessert extends MenuItem {
+  constructor(name, price) {
+    super(name, price);
+  }
+
   getDescription() {
     return `$${this.price} - ${this.name}`;
   }
@@ -31,10 +37,17 @@ class Beverage extends MenuItem {
     super(name, price);
     this.size = size;
   }
+
   getDescription() {
     return `$${this.price} - ${this.name} (${this.size})`;
   }
-};
+}
+
+function printDescriptions(menu) {
+  for (const item of menu) {
+    console.log(item.getDescription());
+  }
+}
 
 module.exports = {
   MenuItem,
