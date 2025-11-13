@@ -51,7 +51,7 @@ Explain how this code demonstrates **polymorphism**. Why can we call `getArea()`
 
 ## Response 1
 
----
+This code shows polymorphism because all the shapes (Circle and Square) are treated as Shape objects, but each shape has its own version of getArea(). Even though shapes contains different types of objects, we can call getArea() on each of them without checking their type. This works because each class overrides the getArea() method. Polymorphism lets us use the same method name for different objects, and the right version is called automatically.
 
 ## Prompt 2
 
@@ -67,22 +67,22 @@ class Media {
   }
 }
 
-class Song {
+class Song extends Media {
   constructor(title, artist) {
-    this.title = title;
+    super(title);
     this.artist = artist;
   }
-  playSong() {
+  play() {
     return `♪ Playing "${this.title}" by ${this.artist}`;
   }
 }
 
-class Podcast {
+class Podcast extends Media {
   constructor(title, host) {
-    this.title = title;
+    super(title);
     this.host = host;
   }
-  playPodcast() {
+  play() {
     return `🎙️ Playing podcast "${this.title}" hosted by ${this.host}`;
   }
 }
@@ -111,3 +111,7 @@ This code works, but it has some problems. Answer the following:
 3. Explain what would happen if you wanted to add a new `Video` class. Compare how much work it would take with the original code versus your improved version.
 
 ## Response 2
+
+We can use inheritance so that Song and Podcast extend Media. Then they can all have a play() method, and we can call play() on any media item without checking its type. Now the playlist.forEach() loop becomes simple, we don’t need if or instanceof checks anymore because polymorphism automatically calls the right method for each object.
+
+If we wanted to add a new Video class, we would only need to create the class and give it a play() method. The loop would not need to change, unlike the original code, where we would have to add another if statement.

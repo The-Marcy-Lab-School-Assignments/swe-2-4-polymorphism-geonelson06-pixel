@@ -11,48 +11,48 @@ class MenuItem {
   }
 }
 
-class Entree {
+class Entree extends MenuItem {
   constructor(name, price, protein) {
-    this.name = name;
-    this.price = price;
+    super(name, price);
     this.protein = protein;
   }
 
-  getEntreeDescription() {
+  getDescription() {
     return `$${this.price} - ${this.name} (${this.protein})`;
   }
 }
 
-class Dessert {
+class Dessert extends MenuItem {
   constructor(name, price, isGlutenFree) {
-    this.name = name;
-    this.price = price;
+    super(name, price);
     this.isGlutenFree = isGlutenFree;
   }
 
-  getDessertDescription() {
+  getDescription() {
     if (this.isGlutenFree) {
-      return `$${this.price} - ${this.name} [GF]`;
+      return `${super.getDescription()} [GF]`;
     }
-    return `$${this.price} - ${this.name}`;
+    return super.getDescription();
+
   }
 }
 
-class Beverage {
+class Beverage extends MenuItem {
+  constructor(name, price, size) {
+    super(name, price);
+    this.size = size;
+  }
 
+  getDescription() {
+    return `$${this.price} - ${this.name} (${this.size})`;
+  }
 }
 
-const printDescriptions = (menu) => {
-  menu.forEach((item) => {
-    if (item instanceof Entree) {
-      console.log(item.getEntreeDescription());
-    } else if (item instanceof Dessert) {
-      console.log(item.getDessertDescription());
-    } else {
-      console.log(item.getDescription());
-    }
-  });
-};
+function printDescriptions(menu) {
+  for (const item of menu) {
+    console.log(item.getDescription());
+  }
+}
 
 module.exports = {
   MenuItem,
