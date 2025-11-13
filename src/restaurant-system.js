@@ -12,23 +12,28 @@ class MenuItem {
 }
 
 class Entree extends MenuItem {
-  constructor(name, price, type) {
+  constructor(name, price, protein) {
     super(name, price);
-    this.type = type;
+    this.protein = protein;
   }
 
   getDescription() {
-    return `$${this.price} - ${this.name} (${this.type})`;
+    return `$${this.price} - ${this.name} (${this.protein})`;
   }
 }
 
 class Dessert extends MenuItem {
-  constructor(name, price) {
+  constructor(name, price, isGlutenFree) {
     super(name, price);
+    this.isGlutenFree = isGlutenFree;
   }
 
   getDescription() {
-    return `$${this.price} - ${this.name}`;
+    if (this.isGlutenFree) {
+      return `${super.getDescription()} [GF]`;
+    }
+    return super.getDescription();
+
   }
 }
 
